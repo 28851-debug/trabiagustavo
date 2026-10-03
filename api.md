@@ -150,3 +150,9 @@ Criação válida responde `201`. Campos inválidos respondem `400 VALIDATION_ER
 - `GET /api/inventory/movements` — histórico global paginado.
 
 As operações respondem com `type`, `quantity`, `previous_stock`, `new_stock`, observação e data. Quantidades devem ser inteiras positivas; ajuste exige saldo inteiro não negativo e justificativa.
+
+## Clientes e reparos
+
+`/api/customers` oferece `GET`, `POST`, `GET /:id`, `PUT /:id` e `DELETE /:id`. Nome e telefone são obrigatórios; cliente com reparos retorna `409 RESOURCE_IN_USE` ao excluir.
+
+`/api/repairs` oferece os mesmos métodos e aceita filtros `status`, `customer`, `device`, `technician`, `entryDateFrom` e `entryDateTo`. Criação exige `customer_id`, `device`, `reported_problem`, `price_cents` e `cost_cents`. Status válidos: `RECEIVED`, `DIAGNOSIS`, `WAITING_APPROVAL`, `WAITING_PART`, `IN_REPAIR`, `READY`, `DELIVERED`, `CANCELLED`.

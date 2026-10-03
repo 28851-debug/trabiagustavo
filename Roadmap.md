@@ -30,9 +30,9 @@
 
 ## Phase 4 — Assistência técnica
 
-- [ ] Gerenciar clientes
-- [ ] Gerenciar ordens de serviço
-- [ ] Implementar filtros e status de reparo
+- [x] Gerenciar clientes
+- [x] Gerenciar ordens de serviço
+- [x] Implementar filtros e status de reparo
 - [ ] Vincular peças aos reparos
 - [ ] Descontar e devolver estoque de peças
 

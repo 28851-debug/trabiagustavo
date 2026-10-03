@@ -34,6 +34,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 - CRUD completo de categorias e fornecedores, com normalização de nomes, validação e proteção contra exclusão de registros em uso.
 - Catálogo de produtos com SKU único normalizado, saldo inicial auditado, valores em centavos, busca, filtros, paginação, detalhes calculados e arquivamento lógico.
 - Entrada, saída e ajuste usam transação e bloqueio `FOR UPDATE`; histórico global e por produto é paginado e testes concorrentes comprovam a prevenção de saldo negativo.
+- Clientes e ordens de serviço possuem CRUD, validação, filtros, oito status e conclusão automática ao marcar `DELIVERED`.
 
 ## Regras de negócio definidas
 
@@ -45,7 +46,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 
 ## Estado atual e próximo passo
 
-Catálogo e estoque estão implementados. A próxima tarefa é criar clientes e ordens de serviço.
+Clientes e reparos estão implementados. A próxima tarefa é integrar peças usadas ao estoque.
 
 ## Problemas e decisões
 

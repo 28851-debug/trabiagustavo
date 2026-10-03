@@ -1,0 +1,1 @@
+import{Router}from"express";import{createCustomerController}from"../controllers/customer-controller.js";export function createCustomerRouter(db){const r=Router(),c=createCustomerController(db);r.get("/",c.list);r.post("/",c.create);r.get("/:id",c.detail);r.put("/:id",c.update);r.delete("/:id",c.remove);return r}
