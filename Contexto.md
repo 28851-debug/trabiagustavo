@@ -40,6 +40,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 - Frontend possui shell administrativo responsivo, navegação móvel, formatadores `pt-BR`, cliente HTTP, feedback visual e dashboard conectado à API.
 - A tela de produtos reúne busca, filtros, cadastro, edição, arquivamento, criação rápida de categorias/fornecedores, entradas, saídas, ajustes e histórico de estoque.
 - As telas de clientes e ordens de serviço oferecem cadastro, busca, edição, status textuais, detalhes técnicos e consumo/devolução de peças com atualização transacional do estoque.
+- O build copia somente a interface para `public/`, bloqueia padrões de segredo, e a suíte completa cobre persistência em disco e o fluxo produto → estoque → reparo → peça → dashboard.
 
 ## Regras de negócio definidas
 
@@ -51,10 +52,11 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 
 ## Estado atual e próximo passo
 
-Todas as áreas funcionais estão implementadas. O próximo passo é empacotar, documentar, executar o fluxo completo e preparar a implantação.
+Todas as áreas funcionais, documentação e verificações locais estão implementadas. O próximo passo é criar o repositório público, provisionar o banco e publicar na Vercel.
 
 ## Problemas e decisões
 
 - SQLite foi descartado em produção porque o filesystem da Vercel é efêmero; Neon/PostgreSQL será usado.
 - O caminho de migrations nos testes usa `fileURLToPath` para funcionar corretamente no Windows.
 - A primeira versão não terá autenticação; a implantação deve ser tratada como uso controlado até essa proteção ser adicionada.
+- A auditoria de produção está limpa; seis alertas moderados permanecem exclusivamente em ferramentas de desenvolvimento e exigem atualizações incompatíveis sugeridas pelo npm.

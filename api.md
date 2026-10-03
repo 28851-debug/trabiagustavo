@@ -78,8 +78,6 @@ Qualquer método ou caminho sem rota registrada responde com `404`:
 }
 ```
 
-Os demais endpoints serão adicionados a este documento junto com suas implementações e testes.
-
 ## Categorias
 
 `GET /api/categories` lista categorias. `POST /api/categories` cria, `PUT /api/categories/:id` altera e `DELETE /api/categories/:id` remove uma categoria sem produtos.
@@ -94,6 +92,9 @@ Criação responde `201`; listagem/edição respondem `200`; exclusão responde 
 
 ```bash
 curl -X POST http://localhost:3000/api/categories -H "Content-Type: application/json" -d '{"name":"Phone Cases"}'
+curl http://localhost:3000/api/categories
+curl -X PUT http://localhost:3000/api/categories/1 -H "Content-Type: application/json" -d '{"name":"Capas"}'
+curl -X DELETE http://localhost:3000/api/categories/1
 ```
 
 ## Fornecedores
@@ -113,6 +114,9 @@ curl -X POST http://localhost:3000/api/categories -H "Content-Type: application/
 
 ```bash
 curl -X POST http://localhost:3000/api/suppliers -H "Content-Type: application/json" -d '{"name":"Distribuidora Sul"}'
+curl http://localhost:3000/api/suppliers
+curl -X PUT http://localhost:3000/api/suppliers/1 -H "Content-Type: application/json" -d '{"name":"Distribuidora Sul","phone":"11999999999"}'
+curl -X DELETE http://localhost:3000/api/suppliers/1
 ```
 
 ## Produtos
@@ -141,6 +145,14 @@ curl -X POST http://localhost:3000/api/suppliers -H "Content-Type: application/j
 
 Criação válida responde `201`. Campos inválidos respondem `400 VALIDATION_ERROR`, SKU duplicado `409 DUPLICATE_SKU`, categoria/fornecedor inexistente `404 NOT_FOUND`.
 
+```bash
+curl "http://localhost:3000/api/products?search=iphone&stockStatus=low"
+curl http://localhost:3000/api/products/1
+curl -X POST http://localhost:3000/api/products -H "Content-Type: application/json" -d '{"sku":"CASE-IP15PM-BLK","name":"Capa iPhone 15","category_id":1,"cost_price_cents":2000,"sale_price_cents":4990,"quantity":50,"minimum_stock":5}'
+curl -X PUT http://localhost:3000/api/products/1 -H "Content-Type: application/json" -d '{"sku":"CASE-IP15PM-BLK","name":"Capa iPhone 15 Pro","category_id":1,"cost_price_cents":2000,"sale_price_cents":5490,"minimum_stock":5}'
+curl -X DELETE http://localhost:3000/api/products/1
+```
+
 ## Estoque e movimentações
 
 - `POST /api/products/:id/stock/add` — corpo `{ "quantity": 20, "note": "Compra" }`.
@@ -151,6 +163,14 @@ Criação válida responde `201`. Campos inválidos respondem `400 VALIDATION_ER
 
 As operações respondem com `type`, `quantity`, `previous_stock`, `new_stock`, observação e data. Quantidades devem ser inteiras positivas; ajuste exige saldo inteiro não negativo e justificativa.
 
+```bash
+curl -X POST http://localhost:3000/api/products/1/stock/add -H "Content-Type: application/json" -d '{"quantity":20,"note":"Compra"}'
+curl -X POST http://localhost:3000/api/products/1/stock/remove -H "Content-Type: application/json" -d '{"quantity":2,"note":"Venda"}'
+curl -X POST http://localhost:3000/api/products/1/stock/adjust -H "Content-Type: application/json" -d '{"new_stock":17,"reason":"Contagem física"}'
+curl http://localhost:3000/api/products/1/movements
+curl http://localhost:3000/api/inventory/movements
+```
+
 ## Clientes e reparos
 
 `/api/customers` oferece `GET`, `POST`, `GET /:id`, `PUT /:id` e `DELETE /:id`. Nome e telefone são obrigatórios; cliente com reparos retorna `409 RESOURCE_IN_USE` ao excluir.
@@ -159,6 +179,21 @@ As operações respondem com `type`, `quantity`, `previous_stock`, `new_stock`, 
 
 `POST /api/repairs/:id/parts` recebe `{ "product_id": 1, "quantity": 1 }`, responde `201` e cria `REPAIR_USAGE`. `DELETE /api/repairs/:id/parts/:partId` responde `204`, devolve o saldo e cria `RETURN`. Estoque insuficiente responde `409` sem alterações parciais.
 
+```bash
+curl http://localhost:3000/api/customers
+curl -X POST http://localhost:3000/api/customers -H "Content-Type: application/json" -d '{"name":"Ana","phone":"11999999999","email":"ana@example.com"}'
+curl http://localhost:3000/api/customers/1
+curl "http://localhost:3000/api/repairs?status=RECEIVED"
+curl -X POST http://localhost:3000/api/repairs -H "Content-Type: application/json" -d '{"customer_id":1,"device":"iPhone 13","reported_problem":"Não liga","price_cents":30000,"cost_cents":10000}'
+curl http://localhost:3000/api/repairs/1
+curl -X POST http://localhost:3000/api/repairs/1/parts -H "Content-Type: application/json" -d '{"product_id":1,"quantity":1}'
+curl -X DELETE http://localhost:3000/api/repairs/1/parts/1
+```
+
 ## Dashboard
 
 `GET /api/dashboard` retorna `total_products`, `total_units`, `inventory_cost_cents`, `potential_retail_cents`, `low_stock_count`, `out_of_stock_count`, `active_repairs`, `recent_movements` e `highest_stock_products`.
+
+```bash
+curl http://localhost:3000/api/dashboard
+```

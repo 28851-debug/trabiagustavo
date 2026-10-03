@@ -6,6 +6,8 @@ import { setupInventory } from "./inventory.js";
 
 const body = document.querySelector("#products-body"), form = document.querySelector("#product-form"), dialog = document.querySelector("#product-dialog"), search = document.querySelector("#search"), categoryFilter = document.querySelector("#category-filter"), stockFilter = document.querySelector("#stock-filter");
 let categories = [], suppliers = [], products = [];
+const initialSearch = new URLSearchParams(location.search).get("search");
+if (initialSearch) search.value = initialSearch;
 const toCents = (value) => Math.round(Number(String(value).replace(/\./g, "").replace(",", ".")) * 100);
 const toDecimal = (value) => (value / 100).toFixed(2).replace(".", ",");
 
@@ -17,8 +19,7 @@ async function loadCatalog() {
 }
 
 export async function loadProducts() {
-  const query = new URLSearchParams(), initial = new URLSearchParams(location.search).get("search");
-  if (initial && !search.value) search.value = initial;
+  const query = new URLSearchParams();
   if (search.value) query.set("search", search.value);
   if (categoryFilter.value) query.set("categoryId", categoryFilter.value);
   if (stockFilter.value) query.set("stockStatus", stockFilter.value);

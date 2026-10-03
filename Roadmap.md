@@ -50,8 +50,8 @@
 - [x] Criar testes da fundação e migrations
 - [x] Concluir testes unitários e de integração da API
 - [x] Concluir testes E2E da interface
-- [ ] Validar persistência e fluxo completo
-- [ ] Finalizar `api.md`, `Contexto.md` e `README.md`
+- [x] Validar persistência e fluxo completo
+- [x] Finalizar `api.md`, `Contexto.md` e `README.md`
 - [ ] Executar auditoria e revisão final
 
 ## Phase 7 — Publicação

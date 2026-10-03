@@ -14,16 +14,17 @@ test("manages a repair, its status and repair parts", async ({ page, request }) 
   await page.getByRole("button", { name: "Salvar ordem" }).click();
 
   await expect(page.getByText("iPhone 13 E2E")).toBeVisible();
-  await expect(page.locator("tbody .badge")).toHaveText("Recebido");
-  await page.getByRole("button", { name: "Detalhes" }).click();
+  const repairRow = page.locator("tbody tr", { hasText: "iPhone 13 E2E" });
+  await expect(repairRow.locator(".badge")).toHaveText("Recebido");
+  await repairRow.getByRole("button", { name: "Detalhes" }).click();
   await expect(page.getByText("Tela quebrada")).toBeVisible();
   await page.getByRole("button", { name: "Editar ordem" }).click();
   await page.locator("#repair-dialog").getByLabel("Status").selectOption("READY");
   await page.getByRole("button", { name: "Salvar ordem" }).click();
 
   await page.getByLabel("Filtrar por status").selectOption("READY");
-  await expect(page.locator("tbody .badge")).toHaveText("Pronto para retirada");
-  await page.getByRole("button", { name: "Detalhes" }).click();
+  await expect(repairRow.locator(".badge")).toHaveText("Pronto para retirada");
+  await repairRow.getByRole("button", { name: "Detalhes" }).click();
   await page.getByRole("button", { name: "Adicionar peça" }).click();
   await page.getByLabel("Produto").selectOption(String(product.id));
   await page.getByLabel("Quantidade").fill("1");
