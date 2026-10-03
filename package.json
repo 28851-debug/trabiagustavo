@@ -1,0 +1,35 @@
+{
+  "name": "trabiagustavo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node --watch server.js",
+    "build": "node scripts/build-frontend.mjs",
+    "start": "node server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "node backend/src/database/migrate.js",
+    "db:seed": "node backend/src/database/seed.js"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.3.14",
+    "cors": "^2.8.5",
+    "drizzle-orm": "^0.45.3",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "postgres": "^3.4.7",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "drizzle-kit": "^0.31.5",
+    "supertest": "^7.1.4",
+    "vitest": "^3.2.4"
+  }
+}
