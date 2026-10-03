@@ -14,7 +14,7 @@
 - [x] Criar servidor e endpoint de saúde
 - [x] Configurar PostgreSQL, Drizzle e migrations
 - [x] Criar tabelas, enums, índices e constraints
-- [ ] Criar seed de categorias e dados demonstrativos
+- [x] Criar seed de categorias e dados demonstrativos
 
 ## Phase 3 — Catálogo e estoque
 
@@ -38,7 +38,7 @@
 
 ## Phase 5 — Dashboard e frontend
 
-- [ ] Implementar indicadores do dashboard
+- [x] Implementar indicadores do dashboard
 - [ ] Criar shell responsivo e componentes compartilhados
 - [ ] Criar interface de produtos e estoque
 - [ ] Criar interface de clientes

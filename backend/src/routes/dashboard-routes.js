@@ -1,0 +1,1 @@
+import{Router}from"express";import{createDashboardController}from"../controllers/dashboard-controller.js";export function createDashboardRouter(db){const r=Router(),c=createDashboardController(db);r.get("/",c.get);return r}

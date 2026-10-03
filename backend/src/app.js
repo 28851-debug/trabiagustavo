@@ -10,6 +10,7 @@ import { createProductRouter } from "./routes/product-routes.js";
 import { createInventoryRouter } from "./routes/inventory-routes.js";
 import { createCustomerRouter } from "./routes/customer-routes.js";
 import { createRepairRouter } from "./routes/repair-routes.js";
+import { createDashboardRouter } from "./routes/dashboard-routes.js";
 
 export function createApp({ db = null, logger = console, staticDir = null } = {}) {
   const app = express();
@@ -32,6 +33,7 @@ export function createApp({ db = null, logger = console, staticDir = null } = {}
     app.use("/api/inventory", createInventoryRouter(db));
     app.use("/api/customers", createCustomerRouter(db));
     app.use("/api/repairs", createRepairRouter(db));
+    app.use("/api/dashboard", createDashboardRouter(db));
   }
 
   if (staticDir) {

@@ -158,3 +158,7 @@ As operações respondem com `type`, `quantity`, `previous_stock`, `new_stock`, 
 `/api/repairs` oferece os mesmos métodos e aceita filtros `status`, `customer`, `device`, `technician`, `entryDateFrom` e `entryDateTo`. Criação exige `customer_id`, `device`, `reported_problem`, `price_cents` e `cost_cents`. Status válidos: `RECEIVED`, `DIAGNOSIS`, `WAITING_APPROVAL`, `WAITING_PART`, `IN_REPAIR`, `READY`, `DELIVERED`, `CANCELLED`.
 
 `POST /api/repairs/:id/parts` recebe `{ "product_id": 1, "quantity": 1 }`, responde `201` e cria `REPAIR_USAGE`. `DELETE /api/repairs/:id/parts/:partId` responde `204`, devolve o saldo e cria `RETURN`. Estoque insuficiente responde `409` sem alterações parciais.
+
+## Dashboard
+
+`GET /api/dashboard` retorna `total_products`, `total_units`, `inventory_cost_cents`, `potential_retail_cents`, `low_stock_count`, `out_of_stock_count`, `active_repairs`, `recent_movements` e `highest_stock_products`.

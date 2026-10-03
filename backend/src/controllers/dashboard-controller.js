@@ -1,0 +1,1 @@
+import{createDashboardRepository}from"../repositories/dashboard-repository.js";import{createDashboardService}from"../services/dashboard-service.js";export function createDashboardController(db){const s=createDashboardService(createDashboardRepository(db));return{get:async(_q,r)=>r.json(await s.get())}}
