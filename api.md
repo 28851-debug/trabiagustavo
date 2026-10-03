@@ -155,7 +155,7 @@ As operações respondem com `type`, `quantity`, `previous_stock`, `new_stock`, 
 
 `/api/customers` oferece `GET`, `POST`, `GET /:id`, `PUT /:id` e `DELETE /:id`. Nome e telefone são obrigatórios; cliente com reparos retorna `409 RESOURCE_IN_USE` ao excluir.
 
-`/api/repairs` oferece os mesmos métodos e aceita filtros `status`, `customer`, `device`, `technician`, `entryDateFrom` e `entryDateTo`. Criação exige `customer_id`, `device`, `reported_problem`, `price_cents` e `cost_cents`. Status válidos: `RECEIVED`, `DIAGNOSIS`, `WAITING_APPROVAL`, `WAITING_PART`, `IN_REPAIR`, `READY`, `DELIVERED`, `CANCELLED`.
+`/api/repairs` oferece os mesmos métodos e aceita filtros `status`, `customer`, `device`, `technician`, `entryDateFrom` e `entryDateTo`. Criação exige `customer_id`, `device`, `reported_problem`, `price_cents` e `cost_cents`. `GET /api/repairs/:id` também retorna `parts`, com nome/SKU do produto, quantidade e custo capturado. Status válidos: `RECEIVED`, `DIAGNOSIS`, `WAITING_APPROVAL`, `WAITING_PART`, `IN_REPAIR`, `READY`, `DELIVERED`, `CANCELLED`.
 
 `POST /api/repairs/:id/parts` recebe `{ "product_id": 1, "quantity": 1 }`, responde `201` e cria `REPAIR_USAGE`. `DELETE /api/repairs/:id/parts/:partId` responde `204`, devolve o saldo e cria `RETURN`. Estoque insuficiente responde `409` sem alterações parciais.
 

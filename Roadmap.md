@@ -41,15 +41,15 @@
 - [x] Implementar indicadores do dashboard
 - [x] Criar shell responsivo e componentes compartilhados
 - [x] Criar interface de produtos e estoque
-- [ ] Criar interface de clientes
-- [ ] Criar interface de reparos
+- [x] Criar interface de clientes
+- [x] Criar interface de reparos
 - [x] Validar acessibilidade e responsividade
 
 ## Phase 6 — Qualidade e documentação
 
 - [x] Criar testes da fundação e migrations
-- [ ] Concluir testes unitários e de integração da API
-- [ ] Concluir testes E2E da interface
+- [x] Concluir testes unitários e de integração da API
+- [x] Concluir testes E2E da interface
 - [ ] Validar persistência e fluxo completo
 - [ ] Finalizar `api.md`, `Contexto.md` e `README.md`
 - [ ] Executar auditoria e revisão final
