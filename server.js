@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import express from "express";
 
 import { createApp } from "./backend/src/app.js";
 import { getConfig } from "./backend/src/config.js";
@@ -11,6 +12,7 @@ const { db } = createProductionDb();
 const publicDirectory = resolve("public");
 
 const app = createApp({
+  app: express(),
   db,
   staticDir: existsSync(publicDirectory) ? publicDirectory : null,
 });

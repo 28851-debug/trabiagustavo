@@ -12,8 +12,7 @@ import { createCustomerRouter } from "./routes/customer-routes.js";
 import { createRepairRouter } from "./routes/repair-routes.js";
 import { createDashboardRouter } from "./routes/dashboard-routes.js";
 
-export function createApp({ db = null, logger = console, staticDir = null } = {}) {
-  const app = express();
+export function createApp({ app = express(), db = null, logger = console, staticDir = null } = {}) {
 
   app.disable("x-powered-by");
   app.locals.db = db;
