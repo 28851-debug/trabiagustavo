@@ -35,6 +35,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 - Catálogo de produtos com SKU único normalizado, saldo inicial auditado, valores em centavos, busca, filtros, paginação, detalhes calculados e arquivamento lógico.
 - Entrada, saída e ajuste usam transação e bloqueio `FOR UPDATE`; histórico global e por produto é paginado e testes concorrentes comprovam a prevenção de saldo negativo.
 - Clientes e ordens de serviço possuem CRUD, validação, filtros, oito status e conclusão automática ao marcar `DELIVERED`.
+- Peças de reparo são consumidas/devolvidas em transações, com custo capturado, referência da OS e proteção concorrente.
 
 ## Regras de negócio definidas
 
@@ -46,7 +47,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 
 ## Estado atual e próximo passo
 
-Clientes e reparos estão implementados. A próxima tarefa é integrar peças usadas ao estoque.
+O backend operacional está completo até a integração de peças. A próxima tarefa é o dashboard e o seed demonstrativo.
 
 ## Problemas e decisões
 

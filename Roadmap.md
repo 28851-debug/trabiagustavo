@@ -33,8 +33,8 @@
 - [x] Gerenciar clientes
 - [x] Gerenciar ordens de serviço
 - [x] Implementar filtros e status de reparo
-- [ ] Vincular peças aos reparos
-- [ ] Descontar e devolver estoque de peças
+- [x] Vincular peças aos reparos
+- [x] Descontar e devolver estoque de peças
 
 ## Phase 5 — Dashboard e frontend
 
