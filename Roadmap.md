@@ -40,10 +40,10 @@
 
 - [x] Implementar indicadores do dashboard
 - [x] Criar shell responsivo e componentes compartilhados
-- [ ] Criar interface de produtos e estoque
+- [x] Criar interface de produtos e estoque
 - [ ] Criar interface de clientes
 - [ ] Criar interface de reparos
-- [ ] Validar acessibilidade e responsividade
+- [x] Validar acessibilidade e responsividade
 
 ## Phase 6 — Qualidade e documentação
 

@@ -38,6 +38,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 - Peças de reparo são consumidas/devolvidas em transações, com custo capturado, referência da OS e proteção concorrente.
 - Dashboard agrega produtos, unidades, valores, alertas, reparos ativos e movimentos; seed idempotente cria 16 categorias e dados opcionais.
 - Frontend possui shell administrativo responsivo, navegação móvel, formatadores `pt-BR`, cliente HTTP, feedback visual e dashboard conectado à API.
+- A tela de produtos reúne busca, filtros, cadastro, edição, arquivamento, criação rápida de categorias/fornecedores, entradas, saídas, ajustes e histórico de estoque.
 
 ## Regras de negócio definidas
 
@@ -49,7 +50,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 
 ## Estado atual e próximo passo
 
-Backend e dashboard visual estão implementados. A próxima tarefa é a interface completa de produtos e estoque.
+Backend, dashboard e gestão visual do catálogo/estoque estão implementados. A próxima tarefa é a interface de clientes e ordens de serviço.
 
 ## Problemas e decisões
 
