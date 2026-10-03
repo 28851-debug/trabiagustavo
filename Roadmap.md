@@ -20,8 +20,8 @@
 
 - [x] Gerenciar categorias
 - [x] Gerenciar fornecedores
-- [ ] Implementar CRUD e arquivamento de produtos
-- [ ] Implementar busca, filtros e paginação
+- [x] Implementar CRUD e arquivamento de produtos
+- [x] Implementar busca, filtros e paginação
 - [ ] Implementar entrada de estoque
 - [ ] Implementar saída de estoque
 - [ ] Implementar ajuste de estoque

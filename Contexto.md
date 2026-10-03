@@ -32,6 +32,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 - Schema Drizzle e migration inicial executável em PostgreSQL/PGlite.
 - Testes reais de saúde, criação das tabelas, enums e constraint de estoque.
 - CRUD completo de categorias e fornecedores, com normalização de nomes, validação e proteção contra exclusão de registros em uso.
+- Catálogo de produtos com SKU único normalizado, saldo inicial auditado, valores em centavos, busca, filtros, paginação, detalhes calculados e arquivamento lógico.
 
 ## Regras de negócio definidas
 
@@ -43,7 +44,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 
 ## Estado atual e próximo passo
 
-A fundação, o banco, as categorias e os fornecedores estão implementados. A próxima tarefa é criar o catálogo de produtos com busca, filtros, paginação e arquivamento.
+O catálogo está implementado. A próxima tarefa é expor entrada, saída, ajuste e histórico transacional de estoque, incluindo teste concorrente.
 
 ## Problemas e decisões
 

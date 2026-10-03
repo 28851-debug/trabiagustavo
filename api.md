@@ -114,3 +114,29 @@ curl -X POST http://localhost:3000/api/categories -H "Content-Type: application/
 ```bash
 curl -X POST http://localhost:3000/api/suppliers -H "Content-Type: application/json" -d '{"name":"Distribuidora Sul"}'
 ```
+
+## Produtos
+
+- `GET /api/products`: lista com `page`, `pageSize`, `search`, `categoryId`, `brand`, `compatibility`, `stockStatus`, `minPriceCents` e `maxPriceCents`.
+- `GET /api/products/:id`: detalhe com categoria, fornecedor, custo total e valor potencial.
+- `POST /api/products`: cria e registra `IN` quando o saldo inicial é positivo.
+- `PUT /api/products/:id`: altera dados cadastrais; não aceita `quantity`.
+- `DELETE /api/products/:id`: arquiva e responde `204`.
+
+```json
+{
+  "sku": "CASE-IP15PM-BLK",
+  "name": "Capa de silicone iPhone 15 Pro Max",
+  "category_id": 1,
+  "brand": "Generic",
+  "compatibility": "iPhone 15 Pro Max",
+  "cost_price_cents": 2000,
+  "sale_price_cents": 4990,
+  "quantity": 50,
+  "minimum_stock": 5,
+  "supplier_id": null,
+  "notes": null
+}
+```
+
+Criação válida responde `201`. Campos inválidos respondem `400 VALIDATION_ERROR`, SKU duplicado `409 DUPLICATE_SKU`, categoria/fornecedor inexistente `404 NOT_FOUND`.

@@ -6,6 +6,7 @@ import { errorHandler, notFoundHandler } from "./middleware/error-handler.js";
 import { createHealthRouter } from "./routes/health-routes.js";
 import { createCategoryRouter } from "./routes/category-routes.js";
 import { createSupplierRouter } from "./routes/supplier-routes.js";
+import { createProductRouter } from "./routes/product-routes.js";
 
 export function createApp({ db = null, logger = console, staticDir = null } = {}) {
   const app = express();
@@ -24,6 +25,7 @@ export function createApp({ db = null, logger = console, staticDir = null } = {}
   if (db) {
     app.use("/api/categories", createCategoryRouter(db));
     app.use("/api/suppliers", createSupplierRouter(db));
+    app.use("/api/products", createProductRouter(db));
   }
 
   if (staticDir) {
