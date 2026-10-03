@@ -1,3 +1,5 @@
+import { AppError } from "../errors/app-error.js";
+
 export function notFoundHandler(request, response) {
   response.status(404).json({
     error: {
@@ -15,10 +17,12 @@ export function errorHandler(error, _request, response, _next) {
     return;
   }
 
-  response.status(500).json({
+  const known = error instanceof AppError;
+  response.status(known ? error.status : 500).json({
     error: {
-      code: "INTERNAL_ERROR",
-      message: "Erro interno do servidor.",
+      code: known ? error.code : "INTERNAL_ERROR",
+      message: known ? error.message : "Erro interno do servidor.",
+      ...(known && error.details ? { details: error.details } : {}),
     },
   });
 }

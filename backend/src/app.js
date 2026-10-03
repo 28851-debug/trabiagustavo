@@ -4,6 +4,8 @@ import helmet from "helmet";
 
 import { errorHandler, notFoundHandler } from "./middleware/error-handler.js";
 import { createHealthRouter } from "./routes/health-routes.js";
+import { createCategoryRouter } from "./routes/category-routes.js";
+import { createSupplierRouter } from "./routes/supplier-routes.js";
 
 export function createApp({ db = null, logger = console, staticDir = null } = {}) {
   const app = express();
@@ -19,6 +21,10 @@ export function createApp({ db = null, logger = console, staticDir = null } = {}
   app.use(express.json({ limit: "256kb" }));
 
   app.use("/api/health", createHealthRouter());
+  if (db) {
+    app.use("/api/categories", createCategoryRouter(db));
+    app.use("/api/suppliers", createSupplierRouter(db));
+  }
 
   if (staticDir) {
     app.use(express.static(staticDir));

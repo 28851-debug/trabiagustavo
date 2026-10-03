@@ -18,8 +18,8 @@
 
 ## Phase 3 — Catálogo e estoque
 
-- [ ] Gerenciar categorias
-- [ ] Gerenciar fornecedores
+- [x] Gerenciar categorias
+- [x] Gerenciar fornecedores
 - [ ] Implementar CRUD e arquivamento de produtos
 - [ ] Implementar busca, filtros e paginação
 - [ ] Implementar entrada de estoque
