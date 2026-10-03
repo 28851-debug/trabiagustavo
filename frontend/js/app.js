@@ -1,0 +1,1 @@
+const page=document.body.dataset.page;document.querySelectorAll("[data-nav]").forEach(a=>{if(a.dataset.nav===page)a.setAttribute("aria-current","page")});document.querySelector(".menu-toggle")?.addEventListener("click",()=>document.body.classList.toggle("nav-open"));

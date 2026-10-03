@@ -39,7 +39,7 @@
 ## Phase 5 — Dashboard e frontend
 
 - [x] Implementar indicadores do dashboard
-- [ ] Criar shell responsivo e componentes compartilhados
+- [x] Criar shell responsivo e componentes compartilhados
 - [ ] Criar interface de produtos e estoque
 - [ ] Criar interface de clientes
 - [ ] Criar interface de reparos
