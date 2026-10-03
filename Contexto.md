@@ -33,6 +33,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 - Testes reais de saúde, criação das tabelas, enums e constraint de estoque.
 - CRUD completo de categorias e fornecedores, com normalização de nomes, validação e proteção contra exclusão de registros em uso.
 - Catálogo de produtos com SKU único normalizado, saldo inicial auditado, valores em centavos, busca, filtros, paginação, detalhes calculados e arquivamento lógico.
+- Entrada, saída e ajuste usam transação e bloqueio `FOR UPDATE`; histórico global e por produto é paginado e testes concorrentes comprovam a prevenção de saldo negativo.
 
 ## Regras de negócio definidas
 
@@ -44,7 +45,7 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 
 ## Estado atual e próximo passo
 
-O catálogo está implementado. A próxima tarefa é expor entrada, saída, ajuste e histórico transacional de estoque, incluindo teste concorrente.
+Catálogo e estoque estão implementados. A próxima tarefa é criar clientes e ordens de serviço.
 
 ## Problemas e decisões
 

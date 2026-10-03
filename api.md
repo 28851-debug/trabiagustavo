@@ -140,3 +140,13 @@ curl -X POST http://localhost:3000/api/suppliers -H "Content-Type: application/j
 ```
 
 Criação válida responde `201`. Campos inválidos respondem `400 VALIDATION_ERROR`, SKU duplicado `409 DUPLICATE_SKU`, categoria/fornecedor inexistente `404 NOT_FOUND`.
+
+## Estoque e movimentações
+
+- `POST /api/products/:id/stock/add` — corpo `{ "quantity": 20, "note": "Compra" }`.
+- `POST /api/products/:id/stock/remove` — mesma estrutura; saldo insuficiente gera `409 INSUFFICIENT_STOCK`.
+- `POST /api/products/:id/stock/adjust` — corpo `{ "new_stock": 17, "reason": "Contagem física" }`.
+- `GET /api/products/:id/movements` — histórico paginado do produto.
+- `GET /api/inventory/movements` — histórico global paginado.
+
+As operações respondem com `type`, `quantity`, `previous_stock`, `new_stock`, observação e data. Quantidades devem ser inteiras positivas; ajuste exige saldo inteiro não negativo e justificativa.

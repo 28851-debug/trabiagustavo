@@ -7,6 +7,7 @@ import { createHealthRouter } from "./routes/health-routes.js";
 import { createCategoryRouter } from "./routes/category-routes.js";
 import { createSupplierRouter } from "./routes/supplier-routes.js";
 import { createProductRouter } from "./routes/product-routes.js";
+import { createInventoryRouter } from "./routes/inventory-routes.js";
 
 export function createApp({ db = null, logger = console, staticDir = null } = {}) {
   const app = express();
@@ -26,6 +27,7 @@ export function createApp({ db = null, logger = console, staticDir = null } = {}
     app.use("/api/categories", createCategoryRouter(db));
     app.use("/api/suppliers", createSupplierRouter(db));
     app.use("/api/products", createProductRouter(db));
+    app.use("/api/inventory", createInventoryRouter(db));
   }
 
   if (staticDir) {

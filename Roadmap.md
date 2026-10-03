@@ -22,11 +22,11 @@
 - [x] Gerenciar fornecedores
 - [x] Implementar CRUD e arquivamento de produtos
 - [x] Implementar busca, filtros e paginação
-- [ ] Implementar entrada de estoque
-- [ ] Implementar saída de estoque
-- [ ] Implementar ajuste de estoque
-- [ ] Implementar histórico de movimentações
-- [ ] Validar concorrência e impedir estoque negativo
+- [x] Implementar entrada de estoque
+- [x] Implementar saída de estoque
+- [x] Implementar ajuste de estoque
+- [x] Implementar histórico de movimentações
+- [x] Validar concorrência e impedir estoque negativo
 
 ## Phase 4 — Assistência técnica
 
