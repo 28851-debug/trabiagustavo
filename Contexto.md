@@ -61,7 +61,7 @@ O sistema está publicado e operacional:
 
 A migration inicial e o seed idempotente de 16 categorias foram aplicados. Em 5 de outubro de 2026, a produção respondeu `200` em `/api/health`, todas as páginas principais carregaram sem erros no console e o smoke test percorreu produto, entradas/saídas/ajuste, cliente, reparo, uso/devolução de peça, dashboard e arquivamento dos registros de teste suportados.
 
-As verificações locais da release incluem `npm run build`, 41 testes Vitest, 11 testes Playwright e auditoria sem vulnerabilidades de produção.
+As verificações locais da release incluem `npm run build`, 42 testes Vitest, 12 testes Playwright (incluindo regressão contra XSS armazenado) e auditoria sem vulnerabilidades de produção.
 
 ## Problemas e decisões
 

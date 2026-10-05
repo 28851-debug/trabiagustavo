@@ -82,7 +82,7 @@ Os testes de API usam PostgreSQL real em memória via PGlite. O Playwright inici
 - Alias de produção: `https://trabiagustavo-beta.vercel.app`
 - Deployment imutável: `https://trabiagustavo-8wws99zmf-assssssssss-projects.vercel.app`
 - Commit publicado: `c51ee07`
-- Verificações: build sem erros, 41 testes Vitest, 11 testes Playwright, health HTTP 200 e smoke test completo de produto, estoque, cliente, reparo e peças.
+- Verificações: build sem erros, 42 testes Vitest, 12 testes Playwright, regressão contra XSS armazenado, health HTTP 200 e smoke test completo de produto, estoque, cliente, reparo e peças.
 - Segurança de dependências de produção: `npm audit --omit=dev` sem vulnerabilidades.
 
 Não há autenticação nesta primeira versão. Use o sistema em ambiente controlado até adicionar controle de acesso.
