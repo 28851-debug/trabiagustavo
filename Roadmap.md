@@ -52,12 +52,18 @@
 - [x] Concluir testes E2E da interface
 - [x] Validar persistência e fluxo completo
 - [x] Finalizar `api.md`, `Contexto.md` e `README.md`
-- [ ] Executar auditoria e revisão final
+- [x] Executar auditoria e revisão final
 
 ## Phase 7 — Publicação
 
-- [ ] Criar repositório público `trabiagustavo` no GitHub
-- [ ] Configurar banco Neon
-- [ ] Implantar na Vercel
-- [ ] Executar smoke tests em produção
-- [ ] Registrar relatório final e URLs
+- [x] Criar repositório público `trabiagustavo` no GitHub
+- [x] Configurar banco Neon
+- [x] Implantar na Vercel
+- [x] Executar smoke tests em produção
+- [x] Registrar relatório final e URLs
+
+## Próximas melhorias recomendadas
+
+- Adicionar autenticação e perfis de acesso antes de uso fora de ambiente controlado.
+- Criar rotina de backup, restauração e monitoramento de erros.
+- Adicionar exportação de estoque e ordens de serviço para CSV/PDF.

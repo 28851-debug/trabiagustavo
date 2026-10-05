@@ -50,9 +50,18 @@ Dinheiro é armazenado em centavos inteiros. Timestamps usam UTC. Produtos possu
 - Uso de peça em reparo cria `REPAIR_USAGE`; remoção confirmada cria `RETURN`.
 - Produtos são arquivados para preservar auditoria.
 
-## Estado atual e próximo passo
+## Estado atual
 
-Todas as áreas funcionais, documentação e verificações locais estão implementadas. O próximo passo é criar o repositório público, provisionar o banco e publicar na Vercel.
+O sistema está publicado e operacional:
+
+- Produção: `https://trabiagustavo-beta.vercel.app`
+- Deployment imutável verificado: `https://trabiagustavo-8wws99zmf-assssssssss-projects.vercel.app`
+- Repositório público: `https://github.com/28851-debug/trabiagustavo`
+- Banco: Neon PostgreSQL em São Paulo, conectado aos ambientes Production e Preview da Vercel.
+
+A migration inicial e o seed idempotente de 16 categorias foram aplicados. Em 5 de outubro de 2026, a produção respondeu `200` em `/api/health`, todas as páginas principais carregaram sem erros no console e o smoke test percorreu produto, entradas/saídas/ajuste, cliente, reparo, uso/devolução de peça, dashboard e arquivamento dos registros de teste suportados.
+
+As verificações locais da release incluem `npm run build`, 41 testes Vitest, 11 testes Playwright e auditoria sem vulnerabilidades de produção.
 
 ## Problemas e decisões
 

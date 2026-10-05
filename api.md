@@ -3,6 +3,7 @@
 ## Convenções
 
 - URL base local: `http://localhost:3000/api`
+- URL base de produção: `https://trabiagustavo-beta.vercel.app/api`
 - Conteúdo: `application/json`
 - Valores monetários: centavos inteiros
 - Datas: ISO 8601 em UTC

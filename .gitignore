@@ -9,6 +9,6 @@ test-results/
 *.log
 *.db
 *.sqlite
+# Estado local de ferramentas e deploys
 .vercel/
 .superpowers/
-
