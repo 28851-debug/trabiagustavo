@@ -1,5 +1,6 @@
 import { api } from "./api.js";
 import { formatCurrency, formatDate } from "./formatters.js";
+import { escapeHtml } from "./html.js";
 import { setBusy, showToast } from "./ui.js";
 import { setupRepairParts } from "./repair-parts.js";
 
@@ -12,13 +13,13 @@ const statusOptions = (empty = false) => `${empty ? '<option value="">Todos os s
 
 async function loadReferenceData() {
   const data = await api.get("/customers?pageSize=100"); customers = data.items;
-  form.customer_id.innerHTML = customers.map((customer) => `<option value="${customer.id}">${customer.name} · ${customer.phone}</option>`).join("");
+  form.customer_id.innerHTML = customers.map((customer) => `<option value="${customer.id}">${escapeHtml(customer.name)} · ${escapeHtml(customer.phone)}</option>`).join("");
   form.status.innerHTML = statusOptions(); filter.innerHTML = statusOptions(true);
 }
 async function loadRepairs() {
   const query = new URLSearchParams({ pageSize: "100" }); if (search.value) query.set("device", search.value); if (filter.value) query.set("status", filter.value);
   const data = await api.get(`/repairs?${query}`); repairs = data.items;
-  body.innerHTML = repairs.map((repair) => `<tr><td><strong>#${repair.id}</strong></td><td>${repair.customer_name}</td><td><strong>${repair.device}</strong><small>${[repair.brand, repair.model].filter(Boolean).join(" · ") || "—"}</small></td><td>${formatDate(repair.entry_date)}</td><td>${formatCurrency(repair.price_cents)}</td><td><span class="badge status-${repair.status.toLowerCase()}">${statuses[repair.status]}</span></td><td class="actions"><button data-detail="${repair.id}">Detalhes</button></td></tr>`).join("");
+  body.innerHTML = repairs.map((repair) => `<tr><td><strong>#${repair.id}</strong></td><td>${escapeHtml(repair.customer_name)}</td><td><strong>${escapeHtml(repair.device)}</strong><small>${escapeHtml([repair.brand, repair.model].filter(Boolean).join(" · ") || "—")}</small></td><td>${formatDate(repair.entry_date)}</td><td>${formatCurrency(repair.price_cents)}</td><td><span class="badge status-${repair.status.toLowerCase()}">${statuses[repair.status]}</span></td><td class="actions"><button data-detail="${repair.id}">Detalhes</button></td></tr>`).join("");
   document.querySelector("#repair-empty").hidden = repairs.length > 0;
 }
 function openRepair(repair) {
@@ -28,9 +29,9 @@ async function showDetail(id = currentRepair?.id) {
   currentRepair = await api.get(`/repairs/${id}`);
   document.querySelector("#detail-reference").textContent = `OS #${currentRepair.id} · ${statuses[currentRepair.status]}`;
   document.querySelector("#detail-title").textContent = `${currentRepair.device} · ${currentRepair.customer_name}`;
-  document.querySelector("#detail-content").innerHTML = `<div><span>Problema relatado</span><strong>${currentRepair.reported_problem}</strong></div><div><span>Diagnóstico</span><strong>${currentRepair.diagnosis || "Não informado"}</strong></div><div><span>Técnico</span><strong>${currentRepair.technician || "Não definido"}</strong></div><div><span>Valor</span><strong>${formatCurrency(currentRepair.price_cents)}</strong></div>`;
+  document.querySelector("#detail-content").innerHTML = `<div><span>Problema relatado</span><strong>${escapeHtml(currentRepair.reported_problem)}</strong></div><div><span>Diagnóstico</span><strong>${escapeHtml(currentRepair.diagnosis || "Não informado")}</strong></div><div><span>Técnico</span><strong>${escapeHtml(currentRepair.technician || "Não definido")}</strong></div><div><span>Valor</span><strong>${formatCurrency(currentRepair.price_cents)}</strong></div>`;
   const parts = currentRepair.parts || [];
-  document.querySelector("#parts-list").innerHTML = parts.length ? parts.map((part) => `<div class="part-row"><div><strong>${part.product_name}</strong><small>${part.product_sku} · ${part.quantity} un. · custo ${formatCurrency(part.unit_cost_cents * part.quantity)}</small></div><button class="danger" data-return-part="${part.id}">Devolver peça</button></div>`).join("") : '<p class="muted">Nenhuma peça vinculada.</p>';
+  document.querySelector("#parts-list").innerHTML = parts.length ? parts.map((part) => `<div class="part-row"><div><strong>${escapeHtml(part.product_name)}</strong><small>${escapeHtml(part.product_sku)} · ${part.quantity} un. · custo ${formatCurrency(part.unit_cost_cents * part.quantity)}</small></div><button class="danger" data-return-part="${part.id}">Devolver peça</button></div>`).join("") : '<p class="muted">Nenhuma peça vinculada.</p>';
   if (!detailDialog.open) detailDialog.showModal();
 }
 document.querySelector("#new-repair").onclick = () => openRepair();

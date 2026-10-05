@@ -1,5 +1,6 @@
 import { api } from "./api.js";
 import { formatDate } from "./formatters.js";
+import { escapeHtml } from "./html.js";
 import { setBusy, showToast } from "./ui.js";
 export function setupInventory({ reload }) {
   const dialog = document.querySelector("#stock-dialog"), form = document.querySelector("#stock-form"), preview = document.querySelector("#stock-preview");
@@ -18,7 +19,7 @@ export function setupInventory({ reload }) {
     const history = event.target.closest("[data-history]");
     if (history) {
       const data = await api.get(`/products/${history.dataset.history}/movements`);
-      document.querySelector("#history-list").innerHTML = data.items.map((item) => `<li><strong>${item.type} · ${item.quantity} un.</strong><span>${item.previous_stock} → ${item.new_stock} · ${item.note || "Sem observação"} · ${formatDate(item.created_at)}</span></li>`).join("");
+      document.querySelector("#history-list").innerHTML = data.items.map((item) => `<li><strong>${item.type} · ${item.quantity} un.</strong><span>${item.previous_stock} → ${item.new_stock} · ${escapeHtml(item.note || "Sem observação")} · ${formatDate(item.created_at)}</span></li>`).join("");
       document.querySelector("#history-dialog").showModal();
     }
   });

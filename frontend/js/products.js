@@ -1,5 +1,6 @@
 import { api } from "./api.js";
 import { formatCurrency } from "./formatters.js";
+import { escapeHtml } from "./html.js";
 import { confirmAction, setBusy, showToast } from "./ui.js";
 import { createCatalogItem } from "./catalog-admin.js";
 import { setupInventory } from "./inventory.js";
@@ -13,9 +14,9 @@ const toDecimal = (value) => (value / 100).toFixed(2).replace(".", ",");
 
 async function loadCatalog() {
   [categories, suppliers] = await Promise.all([api.get("/categories"), api.get("/suppliers")]);
-  categoryFilter.innerHTML = '<option value="">Todas as categorias</option>' + categories.map((item) => `<option value="${item.id}">${item.name}</option>`).join("");
-  form.category_id.innerHTML = categories.map((item) => `<option value="${item.id}">${item.name}</option>`).join("");
-  form.supplier_id.innerHTML = '<option value="">Sem fornecedor</option>' + suppliers.map((item) => `<option value="${item.id}">${item.name}</option>`).join("");
+  categoryFilter.innerHTML = '<option value="">Todas as categorias</option>' + categories.map((item) => `<option value="${item.id}">${escapeHtml(item.name)}</option>`).join("");
+  form.category_id.innerHTML = categories.map((item) => `<option value="${item.id}">${escapeHtml(item.name)}</option>`).join("");
+  form.supplier_id.innerHTML = '<option value="">Sem fornecedor</option>' + suppliers.map((item) => `<option value="${item.id}">${escapeHtml(item.name)}</option>`).join("");
 }
 
 export async function loadProducts() {
@@ -26,8 +27,8 @@ export async function loadProducts() {
   const data = await api.get(`/products?${query}`); products = data.items;
   body.innerHTML = products.map((product) => {
     const status = product.quantity === 0 ? "Esgotado" : product.quantity <= product.minimum_stock ? "Baixo" : "Normal";
-    const encoded = JSON.stringify(product).replace(/'/g, "&#39;");
-    return `<tr><td><strong>${product.name}</strong><small>${product.brand || "Sem marca"}</small></td><td>${product.sku}</td><td>${product.category_name}</td><td>${product.compatibility || "—"}</td><td>${formatCurrency(product.sale_price_cents)}</td><td><strong>${product.quantity}</strong></td><td><span class="badge ${status.toLowerCase()}">${status}</span></td><td class="actions"><button data-stock="add" data-product='${encoded}'>Entrada</button><button data-stock="remove" data-product='${encoded}'>Saída</button><button data-stock="adjust" data-product='${encoded}'>Ajustar</button><button data-history="${product.id}">Histórico</button><button data-edit="${product.id}">Editar</button><button class="danger" data-delete="${product.id}">Excluir</button></td></tr>`;
+    const encoded = escapeHtml(JSON.stringify(product));
+    return `<tr><td><strong>${escapeHtml(product.name)}</strong><small>${escapeHtml(product.brand || "Sem marca")}</small></td><td>${escapeHtml(product.sku)}</td><td>${escapeHtml(product.category_name)}</td><td>${escapeHtml(product.compatibility || "—")}</td><td>${formatCurrency(product.sale_price_cents)}</td><td><strong>${product.quantity}</strong></td><td><span class="badge ${status.toLowerCase()}">${status}</span></td><td class="actions"><button data-stock="add" data-product='${encoded}'>Entrada</button><button data-stock="remove" data-product='${encoded}'>Saída</button><button data-stock="adjust" data-product='${encoded}'>Ajustar</button><button data-history="${product.id}">Histórico</button><button data-edit="${product.id}">Editar</button><button class="danger" data-delete="${product.id}">Excluir</button></td></tr>`;
   }).join("");
   document.querySelector("#empty").hidden = products.length > 0;
 }

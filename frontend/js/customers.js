@@ -1,4 +1,5 @@
 import { api } from "./api.js";
+import { escapeHtml } from "./html.js";
 import { confirmAction, setBusy, showToast } from "./ui.js";
 
 const body = document.querySelector("#customers-body"), search = document.querySelector("#customer-search"), dialog = document.querySelector("#customer-dialog"), form = document.querySelector("#customer-form");
@@ -6,7 +7,7 @@ let customers = [];
 async function loadCustomers() {
   const query = new URLSearchParams({ pageSize: "100" }); if (search.value) query.set("search", search.value);
   const data = await api.get(`/customers?${query}`); customers = data.items;
-  body.innerHTML = customers.map((customer) => `<tr><td><strong>${customer.name}</strong></td><td>${customer.phone}</td><td>${customer.email || "—"}</td><td>${customer.notes || "—"}</td><td class="actions"><button data-edit="${customer.id}">Editar</button><button class="danger" data-delete="${customer.id}">Excluir</button></td></tr>`).join("");
+  body.innerHTML = customers.map((customer) => `<tr><td><strong>${escapeHtml(customer.name)}</strong></td><td>${escapeHtml(customer.phone)}</td><td>${escapeHtml(customer.email || "—")}</td><td>${escapeHtml(customer.notes || "—")}</td><td class="actions"><button data-edit="${customer.id}">Editar</button><button class="danger" data-delete="${customer.id}">Excluir</button></td></tr>`).join("");
   document.querySelector("#customer-empty").hidden = customers.length > 0;
 }
 function openCustomer(customer) { form.reset(); form.id.value = customer?.id || ""; form.name.value = customer?.name || ""; form.phone.value = customer?.phone || ""; form.email.value = customer?.email || ""; form.notes.value = customer?.notes || ""; dialog.showModal(); }
