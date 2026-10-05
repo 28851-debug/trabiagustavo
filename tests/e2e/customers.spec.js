@@ -18,3 +18,16 @@ test("creates, searches and edits a customer", async ({ page }) => {
   await page.getByPlaceholder("Nome ou telefone").fill("98888-1111");
   await expect(page.getByText("(11) 98888-1111")).toBeVisible();
 });
+
+test("renders customer fields as text instead of executable markup", async ({ page, request }) => {
+  const maliciousName = `<img src=x onerror="document.body.dataset.xss='executed'">`;
+  await request.post("/api/customers", {
+    data: { name: maliciousName, phone: "11900000000" },
+  });
+
+  await page.goto("/customers.html");
+
+  await expect(page.locator("#customers-body img")).toHaveCount(0);
+  await expect(page.getByText(maliciousName, { exact: true })).toBeVisible();
+  await expect(page.locator("body")).not.toHaveAttribute("data-xss", "executed");
+});
